@@ -11,13 +11,17 @@ public class Main {
             System.out.print("| Opção 1 - Criar Curso       |\n");
             System.out.print("| Opção 2 - Editar Curso          |\n");
             System.out.print("| Opção 3 - Deletar Curso          |\n");
-            System.out.print("| Opção 4 - Criar Disciplina     |\n");
+            System.out.print("| Opção 4 - Criar Disciplina      |\n");
             System.out.print("| Opção 5 - Editar Disciplina          |\n");
             System.out.print("| Opção 6 - Deletar Disciplina          |\n");
             System.out.print("| Opção 7 - Listar Todos Os Cursos     |\n");
-            System.out.print("| Opção 8 - Listar Todas As Disciplinas          |\n");
+            System.out.print("| Opção 8 - Listar Todas As Disciplinas     |\n");
+            System.out.print("| Opção 9 - Criar Usuário       |\n");
+            System.out.print("| Opção 10 - Editar Usuário          |\n");
+            System.out.print("| Opção 11 - Deletar Usuário          |\n");
+            System.out.print("| Opção 12 - Listar Todos Os Usuários          |\n");
             // System.out.print("| Opção 9 - Listar Disciplinas Pertencentes Ao Curso          |\n");
-            System.out.print("| Opção 9 - Sair                            |\n");
+            System.out.print("| Opção 13 - Sair                            |\n");
             System.out.print("|-----------------------------|\n");
             System.out.print("Digite uma opção: ");
 
@@ -127,12 +131,65 @@ public class Main {
                 //     course1.listSubjects();
 
                 //     break;
+                case 9:
+                    System.out.print("\nOpção Criar Usuário Selecionada\n");
+
+                    System.out.println("Digite as informações do usuário a ser criado no seguinte formato: nome, username, senha");
+                    String nameUser = input.nextLine();
+                    String username = input.nextLine();
+                    String password = input.nextLine();
+                    
+                    User.create(nameUser, username, password);
+                    
+                    break;
+
+                case 10:
+                    System.out.print("\nOpção Editar Usuário Selecionada\n");
+
+                    System.out.print("\nLista de Cursos:");
+                    User.all();
+
+                    System.out.print("\nDigite O Id Do Curso A Ser Editado\n");
+                    Integer idUser = input.nextInt();
+                    input.nextLine();
+                    User user = User.get(idUser);
+
+                    System.out.print("\nDigite O Novo Nome Do Curso\n");
+                    String nameUser1 = input.nextLine();
+                    String nickname1 = input.nextLine();
+                    String passwordUser1 = input.nextLine();
+
+                    user.edit(nameUser1, nickname1, passwordUser1);
+
+                    break;
+
+                case 11:
+                    System.out.print("\nOpção Deletar Usuário\n");
+
+                    System.out.print("\nLista de Usuários:");
+                    User.all();
+
+                    System.out.print("\nDigite O Id Do Curso A Ser Deletado\n");
+                    Integer idUser1 = input.nextInt();
+                    input.nextLine();
+                    User user1 = User.get(idUser1);
+                    user1.delete();
+
+                    break;
+
+                case 12:
+                    System.out.print("\nOpção Listar Todos Os Usuários\n");
+
+                    System.out.print("\nLista de Usuários:");
+                    User.all();
+
+                    break;
 
                 default:
                     System.out.print("\nOpção Inválida!");
                     break;
 
-                case 9:
+                case 13:
                     System.out.print("\nAté logo!");
                     input.close();
             }
