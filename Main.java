@@ -1,11 +1,18 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static final int TRUE = 1;
+    public static final int FALSE = 0;
+
+    
+
+    public static void admin_view(){
 
         Scanner input = new Scanner (System.in);
 
-        while(true) {
+        System.out.print(User.logged == TRUE);
+
+        while(User.logged == TRUE) {
             System.out.print("##--Menu--##\n\n");
             System.out.print("|-----------------------------|\n");
             System.out.print("| Opção 1 - Criar Curso       |\n");
@@ -21,7 +28,7 @@ public class Main {
             System.out.print("| Opção 11 - Deletar Usuário          |\n");
             System.out.print("| Opção 12 - Listar Todos Os Usuários          |\n");
             // System.out.print("| Opção 9 - Listar Disciplinas Pertencentes Ao Curso          |\n");
-            System.out.print("| Opção 13 - Sair                            |\n");
+            System.out.print("| Opção 13 - Logout                            |\n");
             System.out.print("|-----------------------------|\n");
             System.out.print("Digite uma opção: ");
 
@@ -134,12 +141,13 @@ public class Main {
                 case 9:
                     System.out.print("\nOpção Criar Usuário Selecionada\n");
 
-                    System.out.println("Digite as informações do usuário a ser criado no seguinte formato: nome, username, senha");
+                    System.out.println("Digite as informações do usuário a ser criado no seguinte formato: nome, role, username, senha");
                     String nameUser = input.nextLine();
+                    String roleUser = input.nextLine();
                     String username = input.nextLine();
                     String password = input.nextLine();
                     
-                    User.create(nameUser, username, password);
+                    User.create(nameUser, roleUser, username, password);
                     
                     break;
 
@@ -184,15 +192,80 @@ public class Main {
                     User.all();
 
                     break;
+                case 13:
+                    User.logged = FALSE;
+                    User.auth = null;
+                    input.close();
 
                 default:
                     System.out.print("\nOpção Inválida!");
                     break;
-
-                case 13:
-                    System.out.print("\nAté logo!");
-                    input.close();
             }
         }
+    }
+    public static void student_view(){
+        System.out.print("ALUNO LOGADO\n\n");
+    }
+
+    public static void main(String[] args) {
+        // --- CRIAR USUÁRIO ADMIN ---
+        User.create("Fabiano", "admin", "Radbios", "123456");
+
+        Scanner input2 = new Scanner (System.in);
+
+        int end = FALSE;
+
+        while(end != TRUE){
+            System.out.print("##--Menu--##\n\n");
+            System.out.print("| Opção 1 - Entrar\n");
+            System.out.print("| Opção 2 - Esqueci a senha\n");
+            System.out.print("| Opção 3 - Sair\n\n");
+
+            int opcao = input2.nextInt();
+            input2.nextLine();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("\nDigite o username:\n\n");
+                    String usernameAuth = input2.nextLine();
+                    System.out.print("\nDigite a senha:\n\n");
+                    String passwordAuth = input2.nextLine();
+
+                    // --- SE DADOS CONFEREM, AUTENTICADO ---
+                    if(User.auth_check(usernameAuth, passwordAuth) == TRUE){
+
+                        System.out.print("AUTH SUCCESSFULLY\n\n");
+
+                        if(User.auth.role.equals("admin")){
+                            admin_view();
+                        }
+                        else{
+                            student_view();
+                        }
+
+                    }
+                    else{
+                        System.out.print("DADOS NÃO CONFEREM\n\n");
+                    }
+
+                    break;
+                case 2:
+                    System.out.print("\noption 2\n\n");
+                    
+                    break;
+                case 3:
+                    System.out.print("\nAté logo!");
+                    end = TRUE;
+                    input2.close();
+                    break;
+
+                default:
+                    System.out.print("\nOpção Inválida!");
+                    break;
+            }
+            
+        }
+
+        
     }
 }
