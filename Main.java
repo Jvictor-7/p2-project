@@ -179,15 +179,15 @@ public class Main {
                 case 12:
                     System.out.print("\nOpção Editar Usuário Selecionada\n");
 
-                    System.out.print("\nLista de Cursos:\n");
+                    System.out.print("\nLista de Usuários:\n");
                     User.all();
 
-                    System.out.print("\nDigite O Id Do Curso A Ser Editado\n");
+                    System.out.print("\nDigite O Id Do Usuário A Ser Editado\n");
                     Integer idUser = input.nextInt();
                     input.nextLine();
                     User user = User.get(idUser);
 
-                    System.out.print("\nDigite O Novo Nome Do Curso\n");
+                    System.out.print("\nDigite O Novo Nome, Nickname e Senha do usuário, nessa ordem\n");
                     String nameUser1 = input.nextLine();
                     String nickname1 = input.nextLine();
                     String passwordUser1 = input.nextLine();
