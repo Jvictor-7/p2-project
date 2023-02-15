@@ -13,20 +13,19 @@ public class Main {
         while (User.logged == TRUE) {
             System.out.print("##--Menu--##\n\n");
             System.out.print("|---------------------------------------------|\n");
-            System.out.print("| Opção 1 - Criar Curso                       |\n");
-            System.out.print("| Opção 2 - Editar Curso                      |\n");
-            System.out.print("| Opção 3 - Deletar Curso                     |\n");
-            System.out.print("| Opção 4 - Criar Disciplina                  |\n");
-            System.out.print("| Opção 5 - Editar Disciplina                 |\n");
-            System.out.print("| Opção 6 - Deletar Disciplina                |\n");
-            System.out.print("| Opção 7 - Listar Todos Os Cursos            |\n");
-            System.out.print("| Opção 8 - Listar Todas As Disciplinas       |\n");
-            System.out.print("| Opção 9 - Criar Usuário                     |\n");
-            System.out.print("| Opção 10 - Editar Usuário                   |\n");
-            System.out.print("| Opção 11 - Deletar Usuário                  |\n");
-            System.out.print("| Opção 12 - Listar Todos Os Usuários         |\n");
-            System.out.print("| Opção 13 - Criar Curso por Arquivo          |\n");
-            // System.out.print("| Opção 9 - Listar Disciplinas Pertencentes Ao Curso |\n");
+            System.out.print("| Opção 1 - Listar Todos Os Cursos            |\n");
+            System.out.print("| Opção 2 - Criar Curso                       |\n");
+            System.out.print("| Opção 3 - Criar Curso Por Arquivo           |\n");
+            System.out.print("| Opção 4 - Editar Curso                      |\n");
+            System.out.print("| Opção 5 - Deletar Curso                     |\n");
+            System.out.print("| Opção 6 - Listar Todas As Disciplinas       |\n");
+            System.out.print("| Opção 7 - Criar Disciplina                  |\n");
+            System.out.print("| Opção 8 - Editar Disciplina                 |\n");
+            System.out.print("| Opção 9 - Deletar Disciplina                |\n");
+            System.out.print("| Opção 10 - Listar Todos Os Usuários         |\n");
+            System.out.print("| Opção 11 - Criar Usuário                    |\n");
+            System.out.print("| Opção 12 - Editar Usuário                   |\n");
+            System.out.print("| Opção 13 - Deletar Usuário                  |\n");
             System.out.print("| Opção 14 - Logout                           |\n");
             System.out.print("|---------------------------------------------|\n");
             System.out.print("Digite uma opção: ");
@@ -36,12 +35,27 @@ public class Main {
 
             switch (opcao) {
                 case 1:
+                    System.out.print("\nOpção Listar Todos Os Cursos\n");
+                    System.out.print("\nLista de Cursos:");
+                    Course.listAll();
+
+                    break;
+                case 2:
                     System.out.print("\nOpção Criar Curso Selecionada");
                     System.out.print("\nDigite O Nome Do Curso A Ser Criado\n");
                     String nameCourse = input.nextLine();
                     Course.create(nameCourse);
+
                     break;
-                case 2:
+                case 3:
+                    System.out.print("\nOpção Criar Curso Por Arquivo\n");
+                    System.out.print("\nRenomeie o arquivo para \"course.json\" e pressione ENTER\n");
+                    input.nextLine();
+                    Course.createCourseFromFile();
+                    System.out.println("Curso Adicionado Com Sucesso");
+
+                    break;
+                case 4:
                     System.out.print("\nOpção Editar Curso Selecionada\n");
 
                     System.out.print("\nLista de Cursos:");
@@ -55,8 +69,9 @@ public class Main {
                     System.out.print("\nDigite O Novo Nome Do Curso\n");
                     String nameEditCourse = input.nextLine();
                     course.edit(nameEditCourse);
+
                     break;
-                case 3:
+                case 5:
                     System.out.print("\nOpção Deletar Curso\n");
 
                     System.out.print("\nLista de Cursos:");
@@ -69,8 +84,13 @@ public class Main {
                     course.delete();
 
                     break;
+                case 6:
+                    System.out.print("\nOpção Listar Todas As Disciplinas\n");
 
-                case 4:
+                    System.out.print("\nLista de Disciplinas:");
+                    Subject.listAll();
+                    break;
+                case 7:
                     System.out.print("\nOpção Criar Disciplina Selecionada");
 
                     System.out.print("\nDigite O Nome Da Disciplina A Ser Criada\n");
@@ -79,8 +99,7 @@ public class Main {
                     Subject.create(nameSubject, codeSubject);
 
                     break;
-
-                case 5:
+                case 8:
                     System.out.print("\nOpção Editar Disciplina Selecionada");
 
                     System.out.print("\nLista de Disciplinas:");
@@ -96,10 +115,8 @@ public class Main {
                     codeSubject = input.nextLine();
 
                     subject.edit(nameSubject, codeSubject);
-
                     break;
-
-                case 6:
+                case 9:
                     System.out.print("\nOpção Deletar Disciplina\n");
 
                     System.out.print("\nLista de Disciplinas:");
@@ -112,32 +129,14 @@ public class Main {
                     subject.delete();
 
                     break;
-                case 7:
-                    System.out.print("\nOpção Listar Todos Os Cursos\n");
+                case 10:
+                    System.out.print("\nOpção Listar Todos Os Usuários\n");
 
-                    System.out.print("\nLista de Cursos:");
-                    Course.listAll();
-
-                    break;
-                case 8:
-                    System.out.print("\nOpção Listar Todas As Disciplinas\n");
-
-                    System.out.print("\nLista de Disciplinas:");
-                    Subject.listAll();
+                    System.out.print("\nLista de Usuários:");
+                    User.all();
 
                     break;
-
-                // case 9:
-                // System.out.print("\nOpção Listar Disciplinas Pertencentes Ao Curso\n");
-
-                // System.out.println("\nDigite o ID do Curso");
-                // Integer courseId = input.nextInt();
-                // input.nextLine();
-                // Course course1 = Course.get(courseId);
-                // course1.listSubjects();
-
-                // break;
-                case 9:
+                case 11:
                     System.out.print("\nOpção Criar Usuário Selecionada\n");
 
                     System.out.println(
@@ -148,10 +147,8 @@ public class Main {
                     String password = input.nextLine();
 
                     User.create(nameUser, roleUser, username, password);
-
                     break;
-
-                case 10:
+                case 12:
                     System.out.print("\nOpção Editar Usuário Selecionada\n");
 
                     System.out.print("\nLista de Cursos:");
@@ -170,10 +167,8 @@ public class Main {
                     user.edit(nameUser1, nickname1, passwordUser1);
 
                     break;
-
-                case 11:
+                case 13:
                     System.out.print("\nOpção Deletar Usuário\n");
-
                     System.out.print("\nLista de Usuários:");
                     User.all();
 
@@ -184,22 +179,6 @@ public class Main {
                     user1.delete();
 
                     break;
-
-                case 12:
-                    System.out.print("\nOpção Listar Todos Os Usuários\n");
-
-                    System.out.print("\nLista de Usuários:");
-                    User.all();
-
-                    break;
-
-                case 13:
-                    System.out.print("\nRenomeie o arquivo para \"course.json\" e pressione ENTER\n");
-                    input.nextLine();
-                    Course.createCourseFromFile();
-                    System.out.println("Curso Adicionado Com Sucesso");
-                    break;
-
                 case 14:
                     User.logged = FALSE;
                     User.auth = null;
