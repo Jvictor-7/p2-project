@@ -196,6 +196,7 @@ public class Main {
                     User.logged = FALSE;
                     User.auth = null;
                     input.close();
+                    break;
 
                 default:
                     System.out.print("\nOpção Inválida!");
@@ -251,7 +252,9 @@ public class Main {
                     break;
                 case 2:
                     System.out.print("\noption 2\n\n");
-                    
+                    System.out.print("\nDigite o username:\n\n");
+                    String usernamePassword = input2.nextLine();
+                    User.recuperarSenha(usernamePassword);
                     break;
                 case 3:
                     System.out.print("\nAté logo!");
@@ -263,9 +266,6 @@ public class Main {
                     System.out.print("\nOpção Inválida!");
                     break;
             }
-            
-        }
-
-        
+        }    
     }
 }

@@ -63,4 +63,18 @@ public class User {
 		// --- SE NÃO, FALSE ---
 		return FALSE;
 	}
+
+	// -- RECUPERAR SENHA ---
+    static public void recuperarSenha(String username){
+        for(int i = 0 ; i < users.size(); i++){
+            if(users.get(i).username.equals(username)){
+                String password = (users.stream().filter(user -> user.username.equals(username)).findFirst().get()).password;
+                System.out.println(password);
+                return;
+            }
+        }
+        System.out.print(" Usuário não encontrado!\n");
+    }
+
+	
 }
