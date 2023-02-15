@@ -66,10 +66,40 @@ public class Main {
                     input.nextLine();
                     Course course = Course.get(idCourse);
 
-                    System.out.print("\nDigite O Novo Nome Do Curso\n");
-                    String nameEditCourse = input.nextLine();
-                    course.edit(nameEditCourse);
+                    System.out.print("| Opção 1 - Editar Nome do Curso\n");
+                    System.out.print("| Opção 2 - Adicionar Matéria\n");
+                    System.out.print("| Opção 3 - Remover Matéria\n");
+                    System.out.print("| Opção 4 - Sair\n\n");
+                    Integer editCourseOption = input.nextInt();
+                    input.nextLine();
 
+                    switch (editCourseOption) {
+                        case 1:
+                            System.out.print("\nDigite O Novo Nome Do Curso\n");
+                            String nameEditCourse = input.nextLine();
+                            course.edit(nameEditCourse);
+                            break;
+                        case 2:
+                            course.listCourseSubjects();
+                            System.out.println("\nDisciplinas no Sistema:");
+                            Subject.listAll();
+                            System.out.println("Selecione o ID da disciplina a ser adicionada: ");
+                            Integer subjectId = input.nextInt();
+                            input.nextLine();
+                            course.addSubjectById(subjectId);
+
+                            break;
+                        case 3:
+                            course.listCourseSubjects();
+                            System.out.println("Selecione o ID da disciplina a ser removida: ");
+                            Integer subjectToRemoveId = input.nextInt();
+                            input.nextLine();
+                            course.removeSubjectById(subjectToRemoveId);
+
+                            break;
+                        default:
+                            System.out.println("Nenhuma ação selecionada.");
+                    }
                     break;
                 case 5:
                     System.out.print("\nOpção Deletar Curso\n");

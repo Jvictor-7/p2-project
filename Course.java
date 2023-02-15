@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Optional;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.nio.file.Files;
@@ -47,6 +49,14 @@ public class Course {
         return courses.stream().filter(course -> course.id == id).findFirst().get();
     }
 
+    public void listCourseSubjects() {
+        System.out.println("Disciplinas do curso: ");
+        this.subjects.forEach(subject -> {
+            System.out.println(subject);
+        });
+        System.out.println("---------------------------------------------");
+    }
+
     static public void create(String name) {
         Course newCourse = new Course(name);
         courses.add(newCourse);
@@ -71,8 +81,32 @@ public class Course {
         this.subjects.add(subject);
     }
 
+    public void addSubjectById(Integer subjectId) {
+        Optional<Subject> subject = Subject.getSubjects().stream().filter(subject1 -> subject1.getId() == subjectId)
+                .findFirst();
+
+        if (!subject.isPresent()) {
+            System.out.println("Matéria não encontrada");
+            return;
+        }
+
+        this.subjects.add(subject.get());
+    }
+
     public void removeSubject(Subject subject) {
         this.subjects.remove(subject);
+    }
+
+    public void removeSubjectById(Integer subjectId) {
+        Optional<Subject> subject = this.subjects.stream().filter(subject1 -> subject1.getId() == subjectId)
+                .findFirst();
+
+        if (!subject.isPresent()) {
+            System.out.println("Matéria não encontrada");
+            return;
+        }
+
+        this.subjects.remove(subject.get());
     }
 
     public static void createCourseFromFile() {

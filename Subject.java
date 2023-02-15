@@ -55,6 +55,14 @@ public class Subject {
         subjects.add(newSubject);
     }
 
+    public Integer getId() {
+        return this.id;
+    }
+
+    static public ArrayList<Subject> getSubjects() {
+        return subjects;
+    }
+
     public void save() {
         subjects.add(this);
     }
