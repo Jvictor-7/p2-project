@@ -1,5 +1,9 @@
 import java.util.ArrayList;
-// import java.util.Optional;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 public class Course {
     static private Integer courseCount = 0;
@@ -16,10 +20,9 @@ public class Course {
 
     public String toString() {
         return String.format(
-            "ID.: %d | Nome.: %s ",
-            this.id,
-            this.name
-        );
+                "ID.: %d | Nome.: %s ",
+                this.id,
+                this.name);
     }
 
     static public void listAll() {
@@ -27,6 +30,17 @@ public class Course {
             System.out.println("\nNÃO Há Cursos Cadastrados No Sistema\n");
         }
         Course.courses.forEach(course -> System.out.println(course));
+    }
+
+    static public void listAllWithSubjects() {
+        Course.courses.forEach(course -> {
+            System.out.println(course);
+            System.out.println("Matérias: ");
+            course.subjects.forEach(subject -> {
+                System.out.println(subject);
+            });
+            System.out.println("---------------------------------------------");
+        });
     }
 
     static public Course get(Integer id) {
@@ -59,5 +73,33 @@ public class Course {
 
     public void removeSubject(Subject subject) {
         this.subjects.remove(subject);
+    }
+
+    public static void createCourseFromFile() {
+        try {
+            String jsonStr = new String(Files.readAllBytes(Paths.get("course.json")));
+            JSONObject jsonObj = new JSONObject(jsonStr);
+
+            String courseName = jsonObj.getString("name");
+            Course newCourse = new Course(courseName);
+
+            JSONArray subjectsArr = jsonObj.getJSONArray("subjects");
+            for (int i = 0; i < subjectsArr.length(); i++) {
+                JSONObject subjectObj = subjectsArr.getJSONObject(i);
+
+                Subject newSubject = new Subject(
+                        subjectObj.getString("name"),
+                        subjectObj.getString("code"),
+                        subjectObj.getInt("semester"),
+                        subjectObj.getInt("workload"),
+                        subjectObj.getBoolean("optional"));
+                newCourse.addSubject(newSubject);
+                newSubject.save();
+            }
+            courses.add(newCourse);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

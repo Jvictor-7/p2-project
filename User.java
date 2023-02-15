@@ -1,4 +1,13 @@
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.File;
+
 
 public class User {
 	static int userCount = 0;
@@ -9,6 +18,10 @@ public class User {
 	public static int logged = FALSE;
 
 	static ArrayList<User> users = new ArrayList<User>();
+
+	private String studying;
+	private int currentSemester;
+	public String historic;
 	
 	private int id;
 	public String name;
@@ -43,7 +56,6 @@ public class User {
 	
 	public void edit(String name, String username, String password) {
 		this.name = name;
-		this.role = role;
 		this.username = username;
 		this.password = password;
 	}
@@ -69,11 +81,69 @@ public class User {
         for(int i = 0 ; i < users.size(); i++){
             if(users.get(i).username.equals(username)){
                 String password = (users.stream().filter(user -> user.username.equals(username)).findFirst().get()).password;
+                System.out.print("senha : ");
                 System.out.println(password);
                 return;
             }
         }
         System.out.print(" Usuário não encontrado!\n");
+    }
+
+	public static void historic_read() {
+        try {
+            String jsonStr = new String(Files.readAllBytes(Paths.get("historico_analitico.json")));
+            JSONObject jsonObj = new JSONObject(jsonStr);
+                     
+            Integer currentSemester = jsonObj.getInt("currentSemester");
+            JSONArray subjectsArr = jsonObj.getJSONArray("subjects");
+            
+            // for (int i = 0; i < subjectsArr.length(); i++) {
+            //     JSONObject subjectObj = subjectsArr.getJSONObject(i);
+            //     String subjectName = subjectObj.getString("name");
+            //     String subjectCode = subjectObj.getString("code");
+
+            //     Subject aux = new Subject(subjectName, subjectCode);
+            // }
+			User.auth.historic = jsonStr;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+	public void list_historic() {
+        if (this.historic == null) {
+            System.out.println("\nHistórico não cadastrado\n");
+        }
+		else{
+			try {
+				FileWriter file = new FileWriter("seu_histórico.json");
+				file.write(User.auth.historic);
+				file.flush();
+				file.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}			
+		}
+    }
+
+    public void report_generate(){
+		File arquivo = new File("relatorio.json");
+		try {
+			if (!arquivo.exists()) {
+				//cria um arquivo (vazio)
+				arquivo.createNewFile();
+			}
+			//escreve no arquivo
+			FileWriter fw = new FileWriter(arquivo, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write("{\n}");
+			bw.newLine();
+			bw.close();
+			fw.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+ 
     }
 
 	

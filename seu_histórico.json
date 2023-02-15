@@ -1,0 +1,21 @@
+{
+	"currentSemester": 3,
+	"course": "Ciência da Computação",
+	"subjects": [
+		{
+			"name": "Programação 1",
+			"code": "COMP001",
+			"eletiva": false
+		},
+		{
+			"name": "Programação 2",
+			"code": "COMP002",
+			"eletiva": false
+		},
+		{
+			"name": "Programação 3",
+			"code": "COMP003",
+			"eletiva": false
+		}
+	]
+}

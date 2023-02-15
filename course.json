@@ -1,0 +1,29 @@
+{
+	"name": "Ciência da Computação",
+	"subjects": [
+		{
+			"semester": 1,
+			"name": "Programação 1",
+			"code": "COMP001",
+			"optional": false,
+			"workload": 72,
+			"requirements": [
+				{
+					"code": "COMP300"
+				}
+			]
+		},
+		{
+			"semester": 2,
+			"name": "Programação 2",
+			"code": "COMP201",
+			"optional": false,
+			"workload": 72,
+			"requirements": [
+				{
+					"code": "COMP001"
+				}
+			]
+		}
+	]
+}
