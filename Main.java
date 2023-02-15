@@ -8,8 +8,6 @@ public class Main {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.print(User.logged == TRUE);
-
         while (User.logged == TRUE) {
             System.out.print("\n##--Menu--##\n\n");
             System.out.print("|---------------------------------------------|\n");
@@ -213,6 +211,7 @@ public class Main {
                     User.logged = FALSE;
                     User.auth = null;
                     input.close();
+                    break;
 
                 default:
                     System.out.print("\nOpção Inválida!");
@@ -222,25 +221,78 @@ public class Main {
     }
 
     public static void student_view() {
-        System.out.print("ALUNO LOGADO\n\n");
+        Scanner input = new Scanner(System.in);
+
+        while (User.logged == TRUE) {
+            System.out.print("\n##--Menu--##\n\n");
+            System.out.print("|---------------------------------------------|\n");
+            System.out.print("| Opção 1 - Aconselhamento                    |\n");
+            System.out.print("| Opção 2 - Submeter histórico                |\n");
+            System.out.print("| Opção 3 - Ver histórico                     |\n");
+            System.out.print("| Opção 4 - Ver Relatório                     |\n");
+            System.out.print("| Opção 5 - Logout                            |\n");
+            System.out.print("|---------------------------------------------|\n");
+            System.out.print("Digite uma opção: ");
+
+            int opcao = input.nextInt();
+            input.nextLine();
+            switch (opcao) {
+                case 1:
+                    System.out.print("\nEM ANDAMENTO...\n");
+                    
+                    break;
+                case 2:
+                    System.out.print("\n");
+                    System.out.print("--- CONCLUIDO! ---");
+                    System.out.print("\n\n");
+                    User.historic_read();
+                    System.out.print("\n");
+
+                    break;
+                case 3:
+
+                    System.out.print("\n");
+                    User.auth.list_historic();
+                    System.out.print("\n");
+
+                    break;
+                case 4:
+
+                    System.out.print("\n");
+                    User.auth.report_generate();
+                    System.out.print("\n");
+
+                    break;
+                case 5:
+                    User.logged = FALSE;
+                    User.auth = null;
+                    input.close();
+
+                    break;
+                default:
+                    System.out.print("\nOpção Inválida!");
+                    break;
+            }
+        }
     }
 
     public static void main(String[] args) {
         // --- CRIAR USUÁRIO ADMIN ---
         User.create("Fabiano", "admin", "teste", "teste");
+        User.create("Aluno", "aluno", "aluno", "aluno");
 
         Scanner input2 = new Scanner(System.in);
 
         int end = FALSE;
+        int opcao = 0;
 
         while (end != TRUE) {
             System.out.print("##--Menu--##\n\n");
             System.out.print("| Opção 1 - Entrar\n");
             System.out.print("| Opção 2 - Esqueci a senha\n");
-            System.out.print("| Opção 3 - Exibir Historico Analitico                            |\n");
-            System.out.print("| Opção 4 - Sair\n\n");
+            System.out.print("| Opção 3 - Sair\n\n");
 
-            int opcao = input2.nextInt();
+            opcao = input2.nextInt();
             input2.nextLine();
 
             switch (opcao) {
@@ -261,6 +313,10 @@ public class Main {
                             student_view();
                         }
 
+                        System.out.print("Logout.\n\n");
+                        
+                        end = TRUE;
+
                     } else {
                         System.out.print("DADOS NÃO CONFEREM\n\n");
                     }
@@ -268,13 +324,12 @@ public class Main {
                     break;
                 case 2:
                     System.out.print("\noption 2\n\n");
-
+                    System.out.print("\nDigite o username:\n\n");
+                    String usernamePassword = input2.nextLine();
+                    User.recuperarSenha(usernamePassword);
                     break;
+
                 case 3:
-                    Json.read();
-                    break;
-
-                case 4:
                     System.out.print("\nAté logo!");
                     end = TRUE;
                     input2.close();
@@ -284,8 +339,6 @@ public class Main {
                     System.out.print("\nOpção Inválida!");
                     break;
             }
-
-        }
-
+        }    
     }
 }

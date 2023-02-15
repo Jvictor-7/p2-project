@@ -10,7 +10,7 @@ public class Subject {
     private String code;
     private Integer semester;
     private Integer workload;
-    private boolean optional = false;
+    private boolean optional;
 
     public Subject(String name, String code) {
         this.name = name;
@@ -35,7 +35,7 @@ public class Subject {
                 this.code,
                 this.semester,
                 this.workload,
-                !this.optional);
+                this.optional);
     }
 
     static public void listAll() {

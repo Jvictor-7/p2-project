@@ -1,6 +1,0 @@
-{
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Users\\joao0\\Downloads\\json-20220924.jar"
-    ]
-}
