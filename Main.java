@@ -1,41 +1,34 @@
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class Main {
     public static final int TRUE = 1;
     public static final int FALSE = 0;
 
-    
+    public static void admin_view() {
 
-    public static void admin_view(){
-
-        Scanner input = new Scanner (System.in);
+        Scanner input = new Scanner(System.in);
 
         System.out.print(User.logged == TRUE);
 
-        while(User.logged == TRUE) {
+        while (User.logged == TRUE) {
             System.out.print("##--Menu--##\n\n");
-            System.out.print("|-----------------------------|\n");
-            System.out.print("| Opção 1 - Criar Curso       |\n");
-            System.out.print("| Opção 2 - Editar Curso          |\n");
-            System.out.print("| Opção 3 - Deletar Curso          |\n");
-            System.out.print("| Opção 4 - Criar Disciplina      |\n");
-            System.out.print("| Opção 5 - Editar Disciplina          |\n");
-            System.out.print("| Opção 6 - Deletar Disciplina          |\n");
-            System.out.print("| Opção 7 - Listar Todos Os Cursos     |\n");
-            System.out.print("| Opção 8 - Listar Todas As Disciplinas     |\n");
-            System.out.print("| Opção 9 - Criar Usuário       |\n");
-            System.out.print("| Opção 10 - Editar Usuário          |\n");
-            System.out.print("| Opção 11 - Deletar Usuário          |\n");
-            System.out.print("| Opção 12 - Listar Todos Os Usuários          |\n");
-            // System.out.print("| Opção 9 - Listar Disciplinas Pertencentes Ao Curso          |\n");
-            System.out.print("| Opção 13 - Logout                            |\n");
-            System.out.print("|-----------------------------|\n");
+            System.out.print("|---------------------------------------------|\n");
+            System.out.print("| Opção 1 - Criar Curso                       |\n");
+            System.out.print("| Opção 2 - Editar Curso                      |\n");
+            System.out.print("| Opção 3 - Deletar Curso                     |\n");
+            System.out.print("| Opção 4 - Criar Disciplina                  |\n");
+            System.out.print("| Opção 5 - Editar Disciplina                 |\n");
+            System.out.print("| Opção 6 - Deletar Disciplina                |\n");
+            System.out.print("| Opção 7 - Listar Todos Os Cursos            |\n");
+            System.out.print("| Opção 8 - Listar Todas As Disciplinas       |\n");
+            System.out.print("| Opção 9 - Criar Usuário                     |\n");
+            System.out.print("| Opção 10 - Editar Usuário                   |\n");
+            System.out.print("| Opção 11 - Deletar Usuário                  |\n");
+            System.out.print("| Opção 12 - Listar Todos Os Usuários         |\n");
+            System.out.print("| Opção 13 - Criar Curso por Arquivo          |\n");
+            // System.out.print("| Opção 9 - Listar Disciplinas Pertencentes Ao Curso |\n");
+            System.out.print("| Opção 14 - Logout                           |\n");
+            System.out.print("|---------------------------------------------|\n");
             System.out.print("Digite uma opção: ");
 
             int opcao = input.nextInt();
@@ -135,26 +128,27 @@ public class Main {
                     break;
 
                 // case 9:
-                //     System.out.print("\nOpção Listar Disciplinas Pertencentes Ao Curso\n");
+                // System.out.print("\nOpção Listar Disciplinas Pertencentes Ao Curso\n");
 
-                //     System.out.println("\nDigite o ID do Curso");
-                //     Integer courseId = input.nextInt();
-                //     input.nextLine();
-                //     Course course1 = Course.get(courseId);
-                //     course1.listSubjects();
+                // System.out.println("\nDigite o ID do Curso");
+                // Integer courseId = input.nextInt();
+                // input.nextLine();
+                // Course course1 = Course.get(courseId);
+                // course1.listSubjects();
 
-                //     break;
+                // break;
                 case 9:
                     System.out.print("\nOpção Criar Usuário Selecionada\n");
 
-                    System.out.println("Digite as informações do usuário a ser criado no seguinte formato: nome, role, username, senha");
+                    System.out.println(
+                            "Digite as informações do usuário a ser criado no seguinte formato: nome, role, username, senha");
                     String nameUser = input.nextLine();
                     String roleUser = input.nextLine();
                     String username = input.nextLine();
                     String password = input.nextLine();
-                    
+
                     User.create(nameUser, roleUser, username, password);
-                    
+
                     break;
 
                 case 10:
@@ -198,7 +192,15 @@ public class Main {
                     User.all();
 
                     break;
+
                 case 13:
+                    System.out.print("\nRenomeie o arquivo para \"course.json\" e pressione ENTER\n");
+                    input.nextLine();
+                    Course.createCourseFromFile();
+                    System.out.println("Curso Adicionado Com Sucesso");
+                    break;
+
+                case 14:
                     User.logged = FALSE;
                     User.auth = null;
                     input.close();
@@ -209,23 +211,24 @@ public class Main {
             }
         }
     }
-    public static void student_view(){
+
+    public static void student_view() {
         System.out.print("ALUNO LOGADO\n\n");
     }
 
     public static void main(String[] args) {
         // --- CRIAR USUÁRIO ADMIN ---
-        User.create("Fabiano", "admin", "Radbios", "123456");
+        User.create("Fabiano", "admin", "teste", "teste");
 
-        Scanner input2 = new Scanner (System.in);
+        Scanner input2 = new Scanner(System.in);
 
         int end = FALSE;
 
-        while(end != TRUE){
+        while (end != TRUE) {
             System.out.print("##--Menu--##\n\n");
             System.out.print("| Opção 1 - Entrar\n");
             System.out.print("| Opção 2 - Esqueci a senha\n");
-            System.out.print("| Opção 3 - Exibir Historico Analitico                            |\n"); 
+            System.out.print("| Opção 3 - Exibir Historico Analitico                            |\n");
             System.out.print("| Opção 4 - Sair\n\n");
 
             int opcao = input2.nextInt();
@@ -239,26 +242,24 @@ public class Main {
                     String passwordAuth = input2.nextLine();
 
                     // --- SE DADOS CONFEREM, AUTENTICADO ---
-                    if(User.auth_check(usernameAuth, passwordAuth) == TRUE){
+                    if (User.auth_check(usernameAuth, passwordAuth) == TRUE) {
 
                         System.out.print("AUTH SUCCESSFULLY\n\n");
 
-                        if(User.auth.role.equals("admin")){
+                        if (User.auth.role.equals("admin")) {
                             admin_view();
-                        }
-                        else{
+                        } else {
                             student_view();
                         }
 
-                    }
-                    else{
+                    } else {
                         System.out.print("DADOS NÃO CONFEREM\n\n");
                     }
 
                     break;
                 case 2:
                     System.out.print("\noption 2\n\n");
-                    
+
                     break;
                 case 3:
                     Json.read();
@@ -274,9 +275,8 @@ public class Main {
                     System.out.print("\nOpção Inválida!");
                     break;
             }
-            
+
         }
 
-        
     }
 }

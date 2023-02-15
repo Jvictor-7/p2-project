@@ -8,20 +8,31 @@ public class Subject {
     private Integer id;
     private String name;
     private String code;
+    private Integer semester;
+    private Integer workload;
+    private boolean optional = false;
 
-    private Subject(String name, String code) {
+    public Subject(String name, String code) {
         this.name = name;
         this.code = code;
         this.id = ++subjectCounter;
     }
 
+    public Subject(String name, String code, Integer semester, Integer workload, boolean optional) {
+        this.name = name;
+        this.code = code;
+        this.semester = semester;
+        this.workload = workload;
+        this.optional = optional;
+        this.id = ++subjectCounter;
+    }
+
     public String toString() {
         return String.format(
-            "ID.: %d | Nome.: %s | Código.: %s",
-            this.id,
-            this.name,
-            this.code
-        );
+                "ID.: %d | Nome.: %s | Código.: %s",
+                this.id,
+                this.name,
+                this.code);
     }
 
     static public void listAll() {
@@ -39,6 +50,10 @@ public class Subject {
     static public void create(String name, String code) {
         Subject newSubject = new Subject(name, code);
         subjects.add(newSubject);
+    }
+
+    public void save() {
+        subjects.add(this);
     }
 
     public void edit(String name, String code) {
