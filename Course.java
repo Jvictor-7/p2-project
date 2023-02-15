@@ -32,6 +32,17 @@ public class Course {
         Course.courses.forEach(course -> System.out.println(course));
     }
 
+    static public void listAllWithSubjects() {
+        Course.courses.forEach(course -> {
+            System.out.println(course);
+            System.out.println("Matérias: ");
+            course.subjects.forEach(subject -> {
+                System.out.println(subject);
+            });
+            System.out.println("---------------------------------------------");
+        });
+    }
+
     static public Course get(Integer id) {
         return courses.stream().filter(course -> course.id == id).findFirst().get();
     }

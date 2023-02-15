@@ -37,7 +37,7 @@ public class Main {
                 case 1:
                     System.out.print("\nOpção Listar Todos Os Cursos\n");
                     System.out.print("\nLista de Cursos:\n");
-                    Course.listAll();
+                    Course.listAllWithSubjects();
 
                     break;
                 case 2:
