@@ -1,0 +1,27 @@
+{
+	"currentSemester": 3,
+	"subjects": [
+		{
+			"periodo": 2,
+			"name": "Programação 1",
+			"code": "COMP001",
+			"eletiva": false,
+			"carga": 72,
+			"pre-requisitos": [
+				{
+					"code": "COMP300"
+				}
+			]
+		},
+		{
+			"name": "Programação 2",
+			"code": "COMP002",
+			"eletiva": false
+		},
+		{
+			"name": "Programação 3",
+			"code": "COMP003",
+			"eletiva": false
+		}
+	]
+}

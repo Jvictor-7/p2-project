@@ -1,4 +1,10 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Main {
     public static final int TRUE = 1;
@@ -219,7 +225,8 @@ public class Main {
             System.out.print("##--Menu--##\n\n");
             System.out.print("| Opção 1 - Entrar\n");
             System.out.print("| Opção 2 - Esqueci a senha\n");
-            System.out.print("| Opção 3 - Sair\n\n");
+            System.out.print("| Opção 3 - Exibir Historico Analitico                            |\n"); 
+            System.out.print("| Opção 4 - Sair\n\n");
 
             int opcao = input2.nextInt();
             input2.nextLine();
@@ -254,6 +261,10 @@ public class Main {
                     
                     break;
                 case 3:
+                    Json.read();
+                    break;
+
+                case 4:
                     System.out.print("\nAté logo!");
                     end = TRUE;
                     input2.close();

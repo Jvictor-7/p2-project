@@ -43,7 +43,6 @@ public class User {
 	
 	public void edit(String name, String username, String password) {
 		this.name = name;
-		this.role = role;
 		this.username = username;
 		this.password = password;
 	}
