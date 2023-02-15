@@ -29,10 +29,13 @@ public class Subject {
 
     public String toString() {
         return String.format(
-                "ID.: %d | Nome.: %s | Código.: %s",
+                "ID.: %d | Nome.: %s | Código.: %s | Semestre.: %s | Carga Horária.: %s | Eletiva.: %s",
                 this.id,
                 this.name,
-                this.code);
+                this.code,
+                this.semester,
+                this.workload,
+                !this.optional);
     }
 
     static public void listAll() {

@@ -11,7 +11,7 @@ public class Main {
         System.out.print(User.logged == TRUE);
 
         while (User.logged == TRUE) {
-            System.out.print("##--Menu--##\n\n");
+            System.out.print("\n##--Menu--##\n\n");
             System.out.print("|---------------------------------------------|\n");
             System.out.print("| Opção 1 - Listar Todos Os Cursos            |\n");
             System.out.print("| Opção 2 - Criar Curso                       |\n");
@@ -36,7 +36,7 @@ public class Main {
             switch (opcao) {
                 case 1:
                     System.out.print("\nOpção Listar Todos Os Cursos\n");
-                    System.out.print("\nLista de Cursos:");
+                    System.out.print("\nLista de Cursos:\n");
                     Course.listAll();
 
                     break;
@@ -58,7 +58,7 @@ public class Main {
                 case 4:
                     System.out.print("\nOpção Editar Curso Selecionada\n");
 
-                    System.out.print("\nLista de Cursos:");
+                    System.out.print("\nLista de Cursos:\n");
                     Course.listAll();
 
                     System.out.print("\nDigite O Id Do Curso A Ser Editado\n");
@@ -74,7 +74,7 @@ public class Main {
                 case 5:
                     System.out.print("\nOpção Deletar Curso\n");
 
-                    System.out.print("\nLista de Cursos:");
+                    System.out.print("\nLista de Cursos:\n");
                     Course.listAll();
 
                     System.out.print("\nDigite O Id Do Curso A Ser Deletado\n");
@@ -87,7 +87,7 @@ public class Main {
                 case 6:
                     System.out.print("\nOpção Listar Todas As Disciplinas\n");
 
-                    System.out.print("\nLista de Disciplinas:");
+                    System.out.print("\nLista de Disciplinas:\n");
                     Subject.listAll();
                     break;
                 case 7:
@@ -102,7 +102,7 @@ public class Main {
                 case 8:
                     System.out.print("\nOpção Editar Disciplina Selecionada");
 
-                    System.out.print("\nLista de Disciplinas:");
+                    System.out.print("\nLista de Disciplinas:\n");
                     Subject.listAll();
 
                     System.out.print("\nDigite O Id Da Disciplina A Ser Editada\n");
@@ -119,7 +119,7 @@ public class Main {
                 case 9:
                     System.out.print("\nOpção Deletar Disciplina\n");
 
-                    System.out.print("\nLista de Disciplinas:");
+                    System.out.print("\nLista de Disciplinas:\n");
                     Subject.listAll();
 
                     System.out.print("\nDigite O Id Da Disciplina A Ser Deletada\n");
@@ -151,7 +151,7 @@ public class Main {
                 case 12:
                     System.out.print("\nOpção Editar Usuário Selecionada\n");
 
-                    System.out.print("\nLista de Cursos:");
+                    System.out.print("\nLista de Cursos:\n");
                     User.all();
 
                     System.out.print("\nDigite O Id Do Curso A Ser Editado\n");
