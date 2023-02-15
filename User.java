@@ -22,6 +22,7 @@ public class User {
 	private String studying;
 	private int currentSemester;
 	public String historic;
+	public String output_system;
 	
 	private int id;
 	public String name;
@@ -130,16 +131,21 @@ public class User {
 		File arquivo = new File("relatorio.json");
 		try {
 			if (!arquivo.exists()) {
-				//cria um arquivo (vazio)
 				arquivo.createNewFile();
 			}
+		
+			String jsonStr = new String(Files.readAllBytes(Paths.get("test.json")));
+			User.auth.output_system = jsonStr;
+			System.out.print(User.auth.output_system);
 			//escreve no arquivo
-			FileWriter fw = new FileWriter(arquivo, true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write("{\n}");
-			bw.newLine();
-			bw.close();
+			FileWriter fw = new FileWriter(arquivo);
+			fw.write(User.auth.output_system);
+			// bw.newLine();
+			// bw.close();
 			fw.close();
+
+
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}

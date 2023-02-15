@@ -1,0 +1,76 @@
+{
+    "periodo": [
+        {
+            "terceiro" : [
+                {
+                    "disciplinas": [
+                        {
+                            "nome": "algebra linear",
+                            "codigo": "COMP000",
+                            "horario": [
+                                {
+                                    "dia": "segunda",
+                                    "horario": "1"
+                                },
+                                {
+                                    "dia": "quarta",
+                                    "horario": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "nome": "Redes",
+                            "codigo": "COMP001",
+                            "horario": [
+                                {
+                                    "dia": "segunda",
+                                    "horario": "2"
+                                },
+                                {
+                                    "dia": "quarta",
+                                    "horario": "2"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "quarto" : [
+                {
+                    "disciplinas": [
+                        {
+                            "nome": "projeto e análise de algoritmo",
+                            "codigo": "COMP002",
+                            "horario": [
+                                {
+                                    "dia": "terça",
+                                    "horario": "4"
+                                },
+                                {
+                                    "dia": "quinta",
+                                    "horario": "4"
+                                }
+                            ]
+                        },
+                        {
+                            "nome": "teoria da computação",
+                            "codigo": "COMP003",
+                            "horario": [
+                                {
+                                    "dia": "terça",
+                                    "horario": "2"
+                                },
+                                {
+                                    "dia": "terça",
+                                    "horario": "3"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
