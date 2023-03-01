@@ -10,7 +10,15 @@ import java.io.IOException;
 public class Course {
     static private Integer courseCount = 0;
     static private ArrayList<Course> courses = new ArrayList<Course>();
+
+    // --- TODAS AS DISCIPLINAS DO CURSO ---
     private ArrayList<Subject> subjects = new ArrayList<Subject>();
+
+    // --- CONTADOR DE DISCIPLINAS ELETIVAS ---
+    private int optional_count = 0;
+
+    // --- GRADE CURRICULAR DO CURSO ---
+    private ArrayList<Subject> grade = new ArrayList<Subject>();
 
     private Integer id;
     private String name;
@@ -40,6 +48,8 @@ public class Course {
             System.out.println("Matérias: ");
             course.subjects.forEach(subject -> {
                 System.out.println(subject);
+                System.out.println("requiriments\n");
+                System.out.println(subject.requirements);
             });
             System.out.println("---------------------------------------------");
         });
@@ -117,7 +127,7 @@ public class Course {
             String courseName = jsonObj.getString("name");
             Course newCourse = new Course(courseName);
 
-            JSONArray subjectsArr = jsonObj.getJSONArray("subjects");
+            JSONArray subjectsArr = jsonObj.getJSONArray("curriculum");
             for (int i = 0; i < subjectsArr.length(); i++) {
                 JSONObject subjectObj = subjectsArr.getJSONObject(i);
 
@@ -126,7 +136,25 @@ public class Course {
                         subjectObj.getString("code"),
                         subjectObj.getInt("semester"),
                         subjectObj.getInt("workload"),
-                        subjectObj.getBoolean("optional"));
+                        subjectObj.getBoolean("optional")
+                        );
+
+                JSONArray subjectsArrRequirements = subjectObj.getJSONArray("requirements");
+
+                System.out.print(subjectsArrRequirements);
+
+                // --- ADICIONAR PRE-REQUISITOS ---
+                for (int j = 0; j < subjectsArrRequirements.length(); j++) {
+                    JSONObject subjectObjRequirements = subjectsArrRequirements.getJSONObject(j);
+    
+                    Subject newSubjectRequirements = new Subject(
+                                subjectObjRequirements.getString("name"),
+                                subjectObjRequirements.getString("code")
+                            );
+                    newSubject.addRequirements(newSubjectRequirements);
+                    newSubjectRequirements.save();
+                }
+
                 newCourse.addSubject(newSubject);
                 newSubject.save();
             }

@@ -19,11 +19,13 @@ public class User {
 
 	static ArrayList<User> users = new ArrayList<User>();
 
-	private String studying;
 	private int currentSemester;
+	private String course;
 	public String historic;
-	public String output_system;
-	
+
+	// --- ARRAYLIST DAS DISCIPLINAS PAGAS PELO ALUNO ---
+	public ArrayList<Subject> discipline_list = new ArrayList<Subject>();
+
 	private int id;
 	public String name;
 	public String role;
@@ -97,15 +99,21 @@ public class User {
                      
             Integer currentSemester = jsonObj.getInt("currentSemester");
             JSONArray subjectsArr = jsonObj.getJSONArray("subjects");
+            String course = jsonObj.getString("course");
             
-            // for (int i = 0; i < subjectsArr.length(); i++) {
-            //     JSONObject subjectObj = subjectsArr.getJSONObject(i);
-            //     String subjectName = subjectObj.getString("name");
-            //     String subjectCode = subjectObj.getString("code");
+            for (int i = 0; i < subjectsArr.length(); i++) {
+                JSONObject subjectObj = subjectsArr.getJSONObject(i);
 
-            //     Subject aux = new Subject(subjectName, subjectCode);
-            // }
+                Subject aux = new Subject(
+					subjectObj.getString("name"),
+					subjectObj.getString("code")
+					);
+
+				auth.discipline_list.add(aux);
+            }
 			User.auth.historic = jsonStr;
+			User.auth.currentSemester = currentSemester;
+			User.auth.course = course;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -117,6 +125,7 @@ public class User {
         }
 		else{
 			try {
+				System.out.print(auth.discipline_list);
 				FileWriter file = new FileWriter("seu_histórico.json");
 				file.write(User.auth.historic);
 				file.flush();
@@ -135,15 +144,12 @@ public class User {
 			}
 		
 			String jsonStr = new String(Files.readAllBytes(Paths.get("test.json")));
-			User.auth.output_system = jsonStr;
-			System.out.print(User.auth.output_system);
 			//escreve no arquivo
 			FileWriter fw = new FileWriter(arquivo);
-			fw.write(User.auth.output_system);
+			fw.write(jsonStr);
 			// bw.newLine();
 			// bw.close();
 			fw.close();
-
 
 
 		} catch (IOException ex) {

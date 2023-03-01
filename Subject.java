@@ -5,6 +5,9 @@ public class Subject {
 
     static private ArrayList<Subject> subjects = new ArrayList<Subject>();
 
+    // --- DISCIPLINAS PRE-REQUISITADAS ---
+    public ArrayList<Subject> requirements = new ArrayList<Subject>();
+
     private Integer id;
     private String name;
     private String code;
@@ -19,6 +22,14 @@ public class Subject {
     }
 
     public Subject(String name, String code, Integer semester, Integer workload, boolean optional) {
+        this.name = name;
+        this.code = code;
+        this.semester = semester;
+        this.workload = workload;
+        this.optional = optional;
+        this.id = ++subjectCounter;
+    }
+    public Subject(String name, String code, Integer semester, Integer workload) {
         this.name = name;
         this.code = code;
         this.semester = semester;
@@ -53,6 +64,10 @@ public class Subject {
     static public void create(String name, String code) {
         Subject newSubject = new Subject(name, code);
         subjects.add(newSubject);
+    }
+
+    public void addRequirements(Subject subject) {
+        this.requirements.add(subject);
     }
 
     public Integer getId() {
