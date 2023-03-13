@@ -8,12 +8,12 @@ public class Subject {
     // --- DISCIPLINAS PRE-REQUISITADAS ---
     public ArrayList<Subject> requirements = new ArrayList<Subject>();
 
-    private Integer id;
-    private String name;
-    private String code;
-    private Integer semester;
-    private Integer workload;
-    private boolean optional;
+    public Integer id;
+    public String name;
+    public String code;
+    public Integer semester;
+    public Integer workload;
+    public boolean optional;
 
     public Subject(String name, String code) {
         this.name = name;

@@ -20,7 +20,7 @@ public class User {
 	static ArrayList<User> users = new ArrayList<User>();
 
 	private int currentSemester;
-	private String course;
+	public String course = "Ciência da Computação";
 	public String historic;
 
 	// --- ARRAYLIST DAS DISCIPLINAS PAGAS PELO ALUNO ---
@@ -72,6 +72,7 @@ public class User {
             if(users.get(i).username.equals(username) && users.get(i).password.equals(password)){
 				User.auth = users.get(i);
 				User.logged = TRUE;
+				System.out.print(User.auth.course);
 				return TRUE;
 			}
         }

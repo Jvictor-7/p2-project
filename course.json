@@ -1,6 +1,7 @@
 {
 	"name": "Ciência da Computação",
-	"curriculum": [
+	"optional workload": 800,
+	"subjects": [
 		{
 			"semester": 1,
 			"name": "Programação 1",
@@ -16,7 +17,17 @@
 					"name": "dfhdfhdfhdfhdfhdf 0",
 					"code": "COMP300"
 				}
-			]
+			],
+			"time": [
+                {
+                    "day": "segunda",
+                    "hour": "1"
+                },
+                {
+                    "dia": "quarta",
+                    "hour": "1"
+                }
+            ]
 		},
 		{
 			"semester": 2,
@@ -38,11 +49,6 @@
 			"optional": true,
 			"workload": 0,
 			"requirements": []
-		}
-	],
-	"optionals":[
-		{
-			
 		}
 	]
 }

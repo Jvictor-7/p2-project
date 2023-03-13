@@ -24,7 +24,8 @@ public class Main {
             System.out.print("| Opção 11 - Criar Usuário                    |\n");
             System.out.print("| Opção 12 - Editar Usuário                   |\n");
             System.out.print("| Opção 13 - Deletar Usuário                  |\n");
-            System.out.print("| Opção 14 - Logout                           |\n");
+            System.out.print("| Opção 14 - Algoritmo Genético               |\n");
+            System.out.print("| Opção 15 - Logout                           |\n");
             System.out.print("|---------------------------------------------|\n");
             System.out.print("Digite uma opção: ");
 
@@ -208,10 +209,16 @@ public class Main {
 
                     break;
                 case 14:
+                    AG pop = new AG();
+                    pop.start();
+                
+                    break;
+                case 15:
                     User.logged = FALSE;
                     User.auth = null;
                     input.close();
                     break;
+                
 
                 default:
                     System.out.print("\nOpção Inválida!");

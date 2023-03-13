@@ -11,14 +11,15 @@ public class Course {
     static private Integer courseCount = 0;
     static private ArrayList<Course> courses = new ArrayList<Course>();
 
-    // --- TODAS AS DISCIPLINAS DO CURSO ---
-    private ArrayList<Subject> subjects = new ArrayList<Subject>();
+    // --- TODAS AS DISCIPLINAS OBRIGATÓRIAS  ---
+    public ArrayList<Subject> subjects = new ArrayList<Subject>();
 
-    // --- CONTADOR DE DISCIPLINAS ELETIVAS ---
-    private int optional_count = 0;
+    // --- TODAS AS DISCIPLINAS ELETIVAS ---
+    public ArrayList<Subject> optional_subjects = new ArrayList<Subject>();
 
-    // --- GRADE CURRICULAR DO CURSO ---
-    private ArrayList<Subject> grade = new ArrayList<Subject>();
+    public int optionalWorkload;
+
+    
 
     private Integer id;
     private String name;
@@ -43,13 +44,19 @@ public class Course {
     }
 
     static public void listAllWithSubjects() {
+        System.out.println(courseCount);
+        
         Course.courses.forEach(course -> {
+            System.out.println(course.optionalWorkload);
             System.out.println(course);
-            System.out.println("Matérias: ");
+            System.out.println("Disciplinas Obrigatórias: ");
             course.subjects.forEach(subject -> {
                 System.out.println(subject);
-                System.out.println("requiriments\n");
-                System.out.println(subject.requirements);
+            });
+
+            System.out.println("Disciplinas Eletivas: ");
+            course.optional_subjects.forEach(subject -> {
+                System.out.println(subject);
             });
             System.out.println("---------------------------------------------");
         });
@@ -59,9 +66,17 @@ public class Course {
         return courses.stream().filter(course -> course.id == id).findFirst().get();
     }
 
+    static public Course getByName(String name) {
+        return courses.stream().filter(course -> course.name.equals(name)).findFirst().get();
+    }
+
     public void listCourseSubjects() {
         System.out.println("Disciplinas do curso: ");
         this.subjects.forEach(subject -> {
+            System.out.println(subject);
+        });
+        System.out.println("Disciplinas Eletivas do curso: ");
+        this.optional_subjects.forEach(subject -> {
             System.out.println(subject);
         });
         System.out.println("---------------------------------------------");
@@ -88,9 +103,13 @@ public class Course {
     }
 
     public void addSubject(Subject subject) {
-        this.subjects.add(subject);
+        if(subject.optional){
+            this.optional_subjects.add(subject);
+        }
+        else{
+            this.subjects.add(subject);
+        }
     }
-
     public void addSubjectById(Integer subjectId) {
         Optional<Subject> subject = Subject.getSubjects().stream().filter(subject1 -> subject1.getId() == subjectId)
                 .findFirst();
@@ -127,7 +146,10 @@ public class Course {
             String courseName = jsonObj.getString("name");
             Course newCourse = new Course(courseName);
 
-            JSONArray subjectsArr = jsonObj.getJSONArray("curriculum");
+            int courseOptionalWorkload = jsonObj.getInt("optional workload");
+            newCourse.optionalWorkload = courseOptionalWorkload;
+
+            JSONArray subjectsArr = jsonObj.getJSONArray("subjects");
             for (int i = 0; i < subjectsArr.length(); i++) {
                 JSONObject subjectObj = subjectsArr.getJSONObject(i);
 
